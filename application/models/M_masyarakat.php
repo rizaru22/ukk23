@@ -13,4 +13,15 @@ class M_masyarakat extends CI_Model{
         $query=$this->db->get();
         return $query->result_array();
     }
+
+    public function tambahAduan($data){
+        return $this->db->insert('pengaduan',$data);
+     }
+
+     public function tampilAduan(){
+        $this->db->where('nik',$_SESSION['nik']);
+        
+        $query=$this->db->get('pengaduan');
+        return $query->result_array();
+     }  
 }

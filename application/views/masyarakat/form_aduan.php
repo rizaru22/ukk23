@@ -1,6 +1,11 @@
 <?= validation_errors() ?>
-<form class="row g-3" method="POST" action="<?= base_url('masyarakat/tambah_aduan') ?>">
-<input type="hidden" value="<?= $this->session->nik ?>">
+<?php 
+  if (!empty($error)){
+    echo $error;
+  }
+?>
+<form class="row g-3" method="POST" action="<?= base_url('masyarakat/simpan_aduan') ?>" enctype="multipart/form-data">
+<input type="hidden" value="<?= $this->session->nik ?>" id="nik" name="nik">
 
   <div class="col-md-12">
     <label for="isilaporan" class="form-label">Isi Laporan</label>
@@ -9,7 +14,7 @@
 
   <div class="col-md-12">
     <label for="foto" class="form-label">Foto</label>
-    <input type="file" class="form-control" id="foto" name="foto" required>
+    <input type="file" class="form-control" id="foto" name="foto">
   </div>
   
   <div class="col-12">

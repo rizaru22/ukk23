@@ -10,18 +10,20 @@ class Masyarakat extends CI_Controller {
 
 
     public function index(){
-        $this->load->view('masyarakat/header');
+        
         //jika variabel session login_status == OK maka tampilkan laporan pengaduan
         if ($this->session->userdata('login_status')=='ok'){
-            $this->load->view('masyarakat/aduan');
+            $this->tampilAduan();
         }
         //jika tidak munculkan login
         else{
+            $this->load->view('masyarakat/header');
             $this->load->view('masyarakat/login');
+            $this->load->view('masyarakat/footer');
         }
         
         
-        $this->load->view('masyarakat/footer');
+        
     }
 
     public function registrasi(){
@@ -102,9 +104,65 @@ class Masyarakat extends CI_Controller {
     }
 
     public function form_aduan(){
+        if ($this->session->userdata('login_status')=='ok'){
+            $this->load->view('masyarakat/header');
+            $this->load->view('masyarakat/form_aduan');
+            $this->load->view('masyarakat/footer');
+        }else{
+            $this->index();
+        }
+        }
+
+    public function simpan_aduan(){
+
+        $this->form_validation->set_rules('isilaporan','Isi Laporan','required');
+
+
+        if ($this->form_validation->run()==FALSE){
+            $this->form_aduan();
+        }else{
+            
+            $config['upload_path']='./img/';
+            $config['allowed_types']='gif|jpg|jpeg|png';
+
+            $this->load->library('upload',$config);
+            if(!$this->upload->do_upload('foto')){
+                $error=array('error'=>$this->upload->display_errors());
+                $this->load->view('masyarakat/header');
+                $this->load->view('masyarakat/form_aduan',$error);
+                $this->load->view('masyarakat/footer');
+            }else{
+                $data =$this->upload->data();
+                $filename=$data['file_name'];
+
+                $data=array(
+                    'tgl_pengaduan' => date('Y-m-d'),
+                    'nik'                   => $_POST['nik'],
+                    'isi_laporan'       => $_POST['isilaporan'],
+                    'foto'                 => $filename
+                );
+
+                if ($this->M_masyarakat->tambahAduan($data)){
+                    
+                    redirect('masyarakat/tampilAduan','refresh');
+            
+                }else{
+                    $error=array('error'=>'Gagal Simpan Data');
+                    $this->load->view('masyarakat/header');
+                    $this->load->view('masyarakat/form_aduan',$error);
+                    $this->load->view('masyarakat/footer');
+                }
+
+            }
+        }
+    }
+        
+    public function tampilAduan(){
+        $data['aduan']=$this->M_masyarakat->tampilAduan();
         $this->load->view('masyarakat/header');
-        $this->load->view('masyarakat/form_aduan');
+        $this->load->view('masyarakat/aduan',$data);
         $this->load->view('masyarakat/footer');
     }
+
 	
 }
