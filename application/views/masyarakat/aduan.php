@@ -1,7 +1,7 @@
 <a href="<?= base_url('masyarakat/form_aduan') ?>" class="btn btn-lg btn-primary mb-5">Buat Pengaduan</a>
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <?php 
-  // var_dump($aduan);
+  
   foreach ($aduan as $data){
     if ($data['status']==0){
       $status='Menunggu';
@@ -25,7 +25,7 @@
     </div>
   ';
   }
- 
+
 
 ?>
 </div>

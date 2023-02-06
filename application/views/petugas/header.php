@@ -8,7 +8,7 @@
   </head>
   <body>
     <header>
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="<?= base_url() ?>">siCePu</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,19 +19,20 @@
       
 
         <?php 
-          if ($this->session->login_status=='ok') {
+          if ($this->session->login_petugas_status=='ok') {
             echo '
             <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="'.base_url('/masyarakat/tampilAduan').'">Pengaduan</a>
-          </li>
-
-            <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="'.base_url('masyarakat/logout').'">Logout</a>
-          </li>';
-          }else{
+            <a class="nav-link" aria-current="page" href="#">Pengaduan</a>';
+              if ($this->session->level=='admin'){
+                echo '</li>
+                <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Petugas</a>
+              </li>';
+              }
+          
             echo '
             <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="'.base_url('masyarakat/registrasi').'">Registrasi</a>
+            <a class="nav-link" aria-current="page" href="'.base_url('petugas/logout').'">Logout</a>
           </li>';
           }
         ?>
