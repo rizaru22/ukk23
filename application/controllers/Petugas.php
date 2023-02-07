@@ -75,6 +75,13 @@ class Petugas extends CI_Controller {
     redirect('petugas/index');
     }
 
+    public function pengaduan(){
+        $data['aduan']=$this->M_petugas->tampilPengaduan();
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/tabelpengaduan',$data);
+        $this->load->view('petugas/footer');
+    }
+
     
     
     
