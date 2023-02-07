@@ -14,18 +14,19 @@
 $no=1;
 foreach ($aduan as $data){
 
-    if($data['status']==0){
+    if($data['status']=='0'){
         $status='menunggu';
     }else{
         $status=$data['status'];
     }
+
     echo '<tr>
     <td>'.$no.'</td>
     <td>'.$data['tgl_pengaduan'].'</td>
     <td>'.$data['nama'].'</td>
     <td>'.$data['isi_laporan'].'</td>
     <td>'.$status.'</td>
-    <td><a href="'.base_url('petugas/tanggapan/').$data['id_pengaduan'].'" class="btn btn-sm btn-warning">Tanggapan</a>&nbsp;<a href="#" class="btn btn-sm btn-primary">Ubah Status</a></td>
+    <td><a href="'.base_url('petugas/detailaduan/').$data['id_pengaduan'].'" class="btn btn-sm btn-primary">Detail</a>&nbsp;<a href="'.base_url('petugas/tanggapan/').$data['id_pengaduan'].'" class="btn btn-sm btn-success">Tanggapan</a></td>
 
 
 </tr>';

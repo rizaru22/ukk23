@@ -17,4 +17,19 @@ class M_petugas extends CI_Model
         return $query->result_array();
     }
 
+    public function tampilDetailAduan($id){
+        $this->db->select('pengaduan.id_pengaduan,pengaduan.tgl_pengaduan,pengaduan.isi_laporan,pengaduan.status,masyarakat.nama,pengaduan.foto');
+        $this->db->join('masyarakat','masyarakat.nik=pengaduan.nik','left');
+        $this->db->where('pengaduan.id_pengaduan='.$id);
+        $query=$this->db->get('pengaduan');
+        return $query->result_array();
+
+    }
+
+    public function ubahStatusAduan($id,$data){
+        $this->db->where('id_pengaduan=',$id);
+        return $this->db->update('pengaduan',$data);
+
+    }
+
 }

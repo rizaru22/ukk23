@@ -82,6 +82,36 @@ class Petugas extends CI_Controller {
         $this->load->view('petugas/footer');
     }
 
+    public function detailaduan($id){
+        $data['detailaduan']=$this->M_petugas->tampilDetailAduan($id);
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/detailaduan',$data);
+        $this->load->view('petugas/footer');
+    }
+
+    public function ubahstatus($id){
+        $this->form_validation->set_rules('status','Status','required');
+        if($this->form_validation->run()==FALSE){
+            $this->load->view('petugas/header');
+            $this->load->view('petugas/detailaduan');
+            $this->load->view('petugas/footer');
+        }else{
+            $data=array(
+                
+                'status'              => $this->input->post('status')
+            );
+
+           if($this->M_petugas->ubahStatusAduan($id,$data)){
+               redirect ('petugas/pengaduan');
+
+           }else{
+            echo "Gagal Ubah Status";
+           }
+        }
+       
+
+    }
+
     
     
     
