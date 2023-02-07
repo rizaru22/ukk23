@@ -32,4 +32,15 @@ class M_petugas extends CI_Model
 
     }
 
+    public function tampilAduanTanggapan($id){
+        $this->db->select('tgl_tanggapan,tanggapan');
+        $this->db->where('id_pengaduan='.$id);
+        $query=$this->db->get('tanggapan');
+        return $query->result_array();
+    }
+
+    public function tambahTanggapan($data){
+        $this->db->insert('tanggapan',$data);
+    }
+
 }

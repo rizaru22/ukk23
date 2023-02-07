@@ -108,12 +108,43 @@ class Petugas extends CI_Controller {
             echo "Gagal Ubah Status";
            }
         }
-       
-
     }
 
     
-    
+    public function tanggapan($id){
+        $data['detailaduan']=$this->M_petugas->tampilDetailAduan($id);
+        $data['aduantanggapan']=$this->M_petugas->tampilAduanTanggapan($id);
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/tanggapan',$data);
+        $this->load->view('petugas/footer');
+
+    }
+
+    public function tambahtanggapan($id){
+        $this->form_validation->set_rules('tanggapan','Tanggapan','required');
+
+        if($this->form_validation->run()==FALSE){
+        $data['detailaduan']=$this->M_petugas->tampilDetailAduan($id);
+        $data['aduantanggapan']=$this->M_petugas->tampilAduanTanggapan($id);
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/tanggapan',$data);
+        $this->load->view('petugas/footer');
+        }else{
+            $data=array(
+                'tgl_tanggapan'=>date('Y-m-d'),
+                'id_pengaduan'=>$id,
+                'tanggapan'     =>$this->input->post('tanggapan'),
+                'id_petugas'    =>$this->session->id_petugas
+            );
+            if ($this->M_petugas->tambahTanggapan($data)){
+                redirect ('petugas/tanggapan/'.$id);
+               
+            }
+
+        }
+
+
+    }
     
 
 
