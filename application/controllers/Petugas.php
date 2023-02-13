@@ -182,6 +182,11 @@ class Petugas extends CI_Controller {
             }
         }
     }
+
+    public function cetakLaporan(){
+        $data['aduan']=$this->M_petugas->tampilPengaduan();
+        $this->load->view('petugas/laporan',$data);
+    }
     
 
 

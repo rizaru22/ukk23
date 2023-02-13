@@ -39,6 +39,11 @@
                 <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="'.base_url('petugas/petugas').'">Petugas</a>
               </li>';
+
+              echo '</li>
+                <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="'.base_url('petugas/cetakLaporan').'" target="_blank">Cetak Laporan</a>
+              </li>';
               }
           
             echo '
