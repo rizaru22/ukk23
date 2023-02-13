@@ -100,7 +100,7 @@ class Masyarakat extends CI_Controller {
             $_SESSION['nama']
     );
 
-    $this->index();
+    redirect('masyarakat');
     }
 
     public function form_aduan(){
@@ -161,6 +161,14 @@ class Masyarakat extends CI_Controller {
         $data['aduan']=$this->M_masyarakat->tampilAduan();
         $this->load->view('masyarakat/header');
         $this->load->view('masyarakat/aduan',$data);
+        $this->load->view('masyarakat/footer');
+    }
+
+    public function tanggapan($id){
+        $data['detailaduan']=$this->M_masyarakat->tampilAduan2($id);
+        $data['aduantanggapan']=$this->M_masyarakat->tampilAduanTanggapan($id);
+        $this->load->view('masyarakat/header');
+        $this->load->view('masyarakat/tanggapan',$data);
         $this->load->view('masyarakat/footer');
     }
 

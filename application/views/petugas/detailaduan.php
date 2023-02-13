@@ -14,9 +14,9 @@ echo '
   </div>
   <div class="col-auto">
   <select name="status" id="status" class="form-select">
-  <option value="0"'; if ($detailaduan[0]['status']=='0') {echo "selected";} echo'>Menunggu</opetion>
-  <option value="proses"'; if ($detailaduan[0]['status']=='proses') {echo "selected";} echo '>Proses</opetion>
-  <option value="selesai"'; if ($detailaduan[0]['status']=='selesai') {echo "selected";} echo'>Selesai</opetion>
+  <option value="0"'; if ($detailaduan[0]['status']=='0') {echo "selected";} echo'>Menunggu</option>
+  <option value="proses"'; if ($detailaduan[0]['status']=='proses') {echo "selected";} echo '>Proses</option>
+  <option value="selesai"'; if ($detailaduan[0]['status']=='selesai') {echo "selected";} echo'>Selesai</option>
   </select>
   </div>
   <div class="col-auto">

@@ -24,4 +24,18 @@ class M_masyarakat extends CI_Model{
         $query=$this->db->get('pengaduan');
         return $query->result_array();
      }  
+
+     public function tampilAduan2($id){
+        $this->db->where('nik',$_SESSION['nik']);
+        $this->db->where('id_pengaduan',$id);
+        $query=$this->db->get('pengaduan');
+        return $query->result_array();
+     }  
+
+     public function tampilAduanTanggapan($id){
+      $this->db->select('tgl_tanggapan,tanggapan');
+      $this->db->where('id_pengaduan='.$id);
+      $query=$this->db->get('tanggapan');
+      return $query->result_array();
+  }
 }

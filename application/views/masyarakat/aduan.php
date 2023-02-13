@@ -3,7 +3,7 @@
   <?php 
   
   foreach ($aduan as $data){
-    if ($data['status']==0){
+    if ($data['status']=='0'){
       $status='Menunggu';
     }else{
       $status=$data['status'];
@@ -18,7 +18,7 @@
           <p class="card-text">Laporan :'.$data['isi_laporan'].'</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-sm btn-primary float-end" >Tanggapan</a>
+          <a href="'.base_url('masyarakat/tanggapan/').$data['id_pengaduan'].'" class="btn btn-sm btn-primary float-end" >Tanggapan</a>
         </div>
   
       </div>
