@@ -140,10 +140,47 @@ class Petugas extends CI_Controller {
                 redirect ('petugas/tanggapan/'.$id);
                
             }
-
         }
+    }
 
+    public function petugas(){
+        $data['petugas']=$this->M_petugas->tampilPetugas();
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/petugas',$data);
+        $this->load->view('petugas/footer');
+    }
 
+    public function tambahPetugas(){
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/form_petugas');
+        $this->load->view('petugas/footer');
+    }
+
+    public function registrasi_petugas(){
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('telepon', 'Telepon', 'required');
+
+        if($this->form_validation->run()==FALSE){
+        $this->load->view('petugas/header');
+        $this->load->view('petugas/form_petugas');
+        $this->load->view('petugas/footer');
+        }else{
+            $data=array(
+                'nama_petugas'=>$this->input->post('nama'),
+                'username'=>$this->input->post('username'),
+                'password'=>md5($this->input->post('password')),
+                'telp'=>$this->input->post('telepon'),
+                'level'=>'petugas'
+            );
+
+            if($this->M_petugas->registrasi_petugas($data)){
+                redirect('petugas/petugas');
+            }else{
+                echo "Gagal Tambah Data Petugas";
+            }
+        }
     }
     
 

@@ -37,7 +37,7 @@
               if ($this->session->level=='admin'){
                 echo '</li>
                 <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Petugas</a>
+                <a class="nav-link" aria-current="page" href="'.base_url('petugas/petugas').'">Petugas</a>
               </li>';
               }
           
